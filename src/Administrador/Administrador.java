@@ -11,40 +11,58 @@ import Paciente.SuspeitaCovid;
 
 public class Administrador {
 
-private ArrayList<Paciente> meusContatos;
+private ArrayList<Paciente> meusPacientes;
 	
 	public Administrador() {
-		meusContatos = new ArrayList<Paciente>();
+		meusPacientes = new ArrayList<Paciente>();
 	}
 	
-	public Paciente adicionarContato(String nome, String idade, String sexo, String sintoma) {
-		Paciente contato = new Comum (nome);
-		contato = this.setContato(contato, idade, sexo, sintoma);
-		this.meusContatos.add(contato);
-		return contato;
+	public Paciente adicionarPaciente(String nome, String idade, String sexo, String sintoma, String doencaCronica, String alergia, String cirurgia) {
+		if(sintoma == "Febre" && sintoma == "Tosse") {
+			Paciente contato = new SuspeitaCovid (nome);
+			contato = this.setPaciente(contato, idade, sexo, sintoma, doencaCronica, alergia, cirurgia);
+			this.tipoPaciente = "Suspeita Covid";
+			this.meusPacientes.add(contato);
+			return contato;
+		}
+		else if(doencaCronica != "Nao" || alergia != "Nao" || cirurgia != "Nao") {
+			Paciente contato = new GrupoRisco (nome);
+			contato = this.setPaciente(contato, idade, sexo, sintoma, doencaCronica, alergia, cirurgia);
+			this.meusPacientes.add(contato);
+			return contato;
+		}
+		else {
+			Paciente contato = new Comum (nome);
+			contato = this.setPaciente(contato, idade, sexo, sintoma, doencaCronica, alergia, cirurgia);
+			this.meusPacientes.add(contato);
+			return contato;
+		}
 	}
 	
-	private Paciente setContato(Paciente contato, String idade, String sexo, String sintoma) {
+	private Paciente setPaciente(Paciente contato, String idade, String sexo, String sintoma, String doencaCronica, String alergia, String cirurgia) {
 		contato.setIdade(idade);
 		contato.setSexo(sexo);
 		contato.setSintoma(sintoma);
+		contato.setDoencaCronica(doencaCronica);
+		contato.setAlergia(alergia);
+		contato.setCirurgia(cirurgia);
 		return contato;
 	}
 	
-	public Paciente atualizarContato(Paciente contato, String nome, String idade, String sexo, String sintoma) {
+	public Paciente atualizarPaciente(Paciente contato, String nome, String idade, String sexo, String sintoma, String doencaCronica, String alergia, String cirurgia) {
 		contato.setNome(nome);
-		contato = this.setContato(contato, idade, sexo, sintoma);
+		contato = this.setPaciente(contato, idade, sexo, sintoma, doencaCronica, alergia, cirurgia);
 		return contato;
 	}
 	
-	public Paciente buscarContato(String umNome) {
+	public Paciente buscarPaciente(String umNome) {
 		Paciente contato = buscarPorNome(umNome);
 		return contato;
 	}
 	
 	private Paciente buscarPorNome(String umNome) {
 		
-		for(Paciente contato: meusContatos) {
+		for(Paciente contato: meusPacientes) {
 			String nomePesquisado = contato.getNome();
 			
 			if (nomePesquisado.equalsIgnoreCase(umNome)) {
@@ -54,19 +72,19 @@ private ArrayList<Paciente> meusContatos;
 		return null;
 	}
 	
-	public boolean removerContato(String umNome) {
+	public boolean removerPaciente(String umNome) {
 		Paciente contato = buscarPorNome(umNome);
 		
 		if (contato == null) {
 			return false;
 		}
 		else {
-			meusContatos.remove(contato);
+			meusPacientes.remove(contato);
 			return true;
 		}
 	}
-	public ArrayList<Paciente> getMeusContatos(){
-		return this.meusContatos;
+	public ArrayList<Paciente> getMeusPacientes(){
+		return this.meusPacientes;
 	}
 	
 	

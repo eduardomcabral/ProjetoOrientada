@@ -10,12 +10,12 @@ import java.util.Scanner;
 
 public class Principal {
 	
-	private static Administrador minhaAgenda;
+	private static Administrador meusPacientes;
 	private static Scanner entrada;
 
 	public static void main(String[] args) {
 		
-		minhaAgenda = new Administrador();
+		meusPacientes = new Administrador();
 		entrada = new Scanner(System.in);
 
 		int opcao = -1;
@@ -26,27 +26,27 @@ public class Principal {
 			
 			switch(opcao) {
 				case 1:{
-					adicionarContato();
+					adicionarPaciente();
 					break;
 				}
 				case 2:{
-					buscarContato();
+					buscarPaciente();
 					break;
 				}
 				case 3:{
-					atualizarContato();
+					atualizarPaciente();
 					break;
 				}
 				case 4: {
-					removerContato();
+					removerPaciente();
 					break;
 				}
 				case 5:{
-					listarContatos();
+					listarPacientes();
 					break;
 				}
 				case 0:{
-					System.out.println("Obrigado por usar a agenda");
+					System.out.println("Finalizado");
 					System.exit(opcao);
 				}
 				default: {
@@ -66,18 +66,18 @@ public class Principal {
 	private static int menu() {
 		System.out.println("\n");
 		System.out.println("Digite uma opcao:");
-		System.out.println("1- Adicionar contato");
-		System.out.println("2- Buscar contato");
-		System.out.println("3- Atualizar contato");
-		System.out.println("4- Remover contato");
-		System.out.println("5- Listar todos os contatos");
+		System.out.println("1- Adicionar paciente");
+		System.out.println("2- Buscar paciente");
+		System.out.println("3- Atualizar paciente");
+		System.out.println("4- Remover paciente");
+		System.out.println("5- Listar todos os pacientes");
 		System.out.println("0- Sair");
 		System.out.println("----------------");
 
 		return Integer.parseInt(entrada.nextLine());
 	}
 	
-	private static void adicionarContato() {
+	private static void adicionarPaciente() {
 		System.out.println("Digite o nome: ");
 		String nome = entrada.nextLine();
 		
@@ -90,7 +90,16 @@ public class Principal {
 		System.out.println("Digite o sintoma: ");
 		String sintoma = entrada.nextLine();
 		
-		Paciente contato = minhaAgenda.adicionarContato(nome, idade, sexo, sintoma);
+		System.out.println("Possui doencas cronicas? ");
+		String doencaCronica = entrada.nextLine();
+		
+		System.out.println("Possui alergias? ");
+		String alergia = entrada.nextLine();
+		
+		System.out.println("Possui historico de cirurgias? ");
+		String cirurgia = entrada.nextLine();
+		
+		Paciente contato = meusPacientes.adicionarPaciente(nome, idade, sexo, sintoma, doencaCronica, alergia, cirurgia);
 		
 		System.out.println("----------------");
 		System.out.println(contato);
@@ -99,14 +108,14 @@ public class Principal {
 		System.out.println("Contato cadastrado com sucesso");
 	}
 	
-	private static void atualizarContato() {
+	private static void atualizarPaciente() {
 		System.out.println("Digite um nome: ");
-		Paciente contato = minhaAgenda.buscarContato(entrada.nextLine());
+		Paciente contato = meusPacientes.buscarPaciente(entrada.nextLine());
 		if(contato == null) {
-			System.out.println("Contato nao encontrado");
+			System.out.println("Paciente nao encontrado");
 		}
 		else {
-			System.out.println("Contato encontrado");
+			System.out.println("Paciente encontrado");
 			System.out.println("Digite o nome: ");
 			String nome = entrada.nextLine();
 			
@@ -119,7 +128,16 @@ public class Principal {
 			System.out.println("Digite o sintoma: ");
 			String sintoma = entrada.nextLine();
 			
-			contato = minhaAgenda.atualizarContato(contato, nome, idade, sexo, sintoma);
+			System.out.println("Possui doencas cronicas? ");
+			String doencaCronica = entrada.nextLine();
+			
+			System.out.println("Possui alergias? ");
+			String alergia = entrada.nextLine();
+			
+			System.out.println("Possui historico de cirurgias? ");
+			String cirurgia = entrada.nextLine();
+			
+			contato = meusPacientes.atualizarPaciente(contato, nome, idade, sexo, sintoma, doencaCronica, alergia, cirurgia);
 			
 			System.out.println("----------------");
 			System.out.println(contato);
@@ -127,11 +145,11 @@ public class Principal {
 		}
 	}
 	
-	private static void buscarContato() {
+	private static void buscarPaciente() {
 		System.out.println("Digite um nome: ");
-		Paciente contato = minhaAgenda.buscarContato(entrada.nextLine());
+		Paciente contato = meusPacientes.buscarPaciente(entrada.nextLine());
 		if(contato == null) {
-			System.out.println("Contato nao encontrado");
+			System.out.println("Paciente nao encontrado");
 		}
 		else {
 			System.out.println("----------------");
@@ -140,19 +158,19 @@ public class Principal {
 		}
 	}
 	
-	private static void removerContato() {
+	private static void removerPaciente() {
 		System.out.println("Digite um nome: ");
-		boolean resultado = minhaAgenda.removerContato(entrada.nextLine());
+		boolean resultado = meusPacientes.removerPaciente(entrada.nextLine());
 		if(resultado == false) {
-			System.out.println("Contato nao encontrado");
+			System.out.println("Paciente nao encontrado");
 		}
 		else {
-			System.out.println("Contato removido");
+			System.out.println("Paciente removido");
 		}
 	}
 	
-	private static void listarContatos() {
-		for(Paciente contato: minhaAgenda.getMeusContatos()) {
+	private static void listarPacientes() {
+		for(Paciente contato: meusPacientes.getMeusPacientes()) {
 			System.out.println(contato);
 		}
 	}
