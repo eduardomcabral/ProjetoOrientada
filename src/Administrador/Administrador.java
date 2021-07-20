@@ -21,7 +21,7 @@ private ArrayList<Paciente> meusPacientes;
 		if(sintoma == "Febre" && sintoma == "Tosse") {
 			Paciente contato = new SuspeitaCovid (nome);
 			contato = this.setPaciente(contato, idade, sexo, sintoma, doencaCronica, alergia, cirurgia);
-			this.tipoPaciente = "Suspeita Covid";
+			//this.tipoPaciente = "Suspeita Covid";
 			this.meusPacientes.add(contato);
 			return contato;
 		}
