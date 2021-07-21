@@ -1,46 +1,45 @@
 package Medico;
+
+import Paciente.Comum;
+import Paciente.Paciente;
+import Paciente.GrupoAtencao;
+
 public abstract class Medico {
 
 	protected String nome;
 	protected String especialidade;
-	private int id;
-	private static int ultimoId = 0;
+	protected String tipoPaciente;
+	protected String encaminhar;
 
 	public Medico(String nome, String especialidade) {
 		this.nome = nome;
 		this.especialidade = especialidade;
-		this.id = ++ultimoId;
 	}
-
-	//public abstract String atacando();
-	
-	//public void atualizar(Paciente paciente) {
-		//vida -= 50;
-		//if (vida <= 0) {
-			//vida = 0;
-			//System.out.println(inimigo.getNome() + " morreu");
-		//}
-		//System.out.println("Testando");
-	//}
+		
 	public String getNome() {
 		return nome;
 	}
+	
 	public String getEspecialidade() {
 		return especialidade;
 	}
 	
-	public int getUltimoId() {
-		return ultimoId;
+	public void encaminhar(Paciente paciente) {
+		tipoPaciente = paciente.getTipo();
+		if(tipoPaciente == "Jovem") {
+			encaminhar = "Pediatra";
+		}
+		else if(tipoPaciente == "Idoso") {
+			encaminhar = "Geriatra";
+		}
+		else if(tipoPaciente == "Adulto") {
+			encaminhar = "Clinico Geral";
+		}
+		else {
+			encaminhar = "Infectologista";
+		}		
 	}
-
-	public int getId() {
-		return id;
-	} 
 	
-	public void mostrarInfo(Medico medico) {
-		System.out.println("---------------");
-		System.out.println("Nome: " + medico.getNome());
-		System.out.println("Especialidade: " + medico.getEspecialidade());
-		System.out.println("---------------");
-	}
+	//public abstract String mostrarInfo(Paciente paciente);
+		
 }
