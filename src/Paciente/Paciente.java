@@ -2,17 +2,17 @@ package Paciente;
 
 public abstract class Paciente {
 
-	protected String nome;
-	protected int idade;
-	protected String sexo;
-	protected String sintoma;
-	protected String tipo;
+	private String nome;
+	private int idade;
+	private String sexo;
+	private String sintoma;
+	private String tipo;
 
-	public Paciente(String nome, int idade, String sexo, String sintoma) {
+	public Paciente(String nome) {
 		this.nome = nome;
-		this.idade = idade;
-		this.sexo = sexo;
-		this.sintoma = sintoma;
+		//this.idade = idade;
+		//this.sexo = sexo;
+		//this.sintoma = sintoma;
 	}
 		
 	public String getNome() {
@@ -33,6 +33,22 @@ public abstract class Paciente {
 	
 	public String getTipo() {
 		return tipo;
+	}
+	
+	public void setNome(String nome){
+		this.nome = nome;
+	}
+	
+	public void setIdade(int idade){
+		this.idade = idade;
+	}
+	
+	public void setSexo(String sexo){
+		this.sexo = sexo;
+	}
+	
+	public void setSintoma(String sintoma){
+		this.sintoma = sintoma;
 	}
 	
 	public abstract String tipoPaciente(Paciente paciente);
