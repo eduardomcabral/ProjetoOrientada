@@ -13,17 +13,18 @@ public class ControlePacientes{
 		Usuarios = new ArrayList<Paciente>();
 	}
 	
-	public Paciente adicionarPaciente(String nome, int idade, String sexo, String sintoma) {
+	public Paciente adicionarPaciente(String nome, int idade, String sexo, String sintoma, String adicional) {
 		Paciente paciente = new Paciente (nome);
-		paciente = this.setPaciente(paciente, idade, sexo, sintoma);
+		paciente = this.setPaciente(paciente, idade, sexo, sintoma, adicional);
 		this.Usuarios.add(paciente);
 		return paciente;
 	}	
 	
-	private Paciente setPaciente(Paciente paciente, int idade, String sexo, String sintoma) {
+	private Paciente setPaciente(Paciente paciente, int idade, String sexo, String sintoma, String adicional) {
 		paciente.setIdade(idade);
 		paciente.setSexo(sexo);
 		paciente.setSintoma(sintoma);
+		paciente.setAdicional(adicional);
 		return paciente;
 	}
 	

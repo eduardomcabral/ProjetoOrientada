@@ -79,7 +79,7 @@ public class Principal {
 		String nome = entrada.nextLine();
 		
 		System.out.println("Digite a idade: ");
-		int idade = entrada.nextLine();
+		int idade = Integer.parseInt(entrada.nextLine());
 		
 		System.out.println("Digite o sexo: ");
 		String sexo = entrada.nextLine();
@@ -87,7 +87,12 @@ public class Principal {
 		System.out.println("Digite o sintoma: ");
 		String sintoma = entrada.nextLine();
 		
-		Paciente paciente = meusPacientes.adicionarPaciente(nome, idade, sexo, sintoma);
+		System.out.println("Caso tenha alguma condição adicional que seja de grupo de risco, adicionar:  ");
+		String adicional = entrada.nextLine();
+		
+		Paciente paciente = meusPacientes.adicionarPaciente(nome, idade, sexo, sintoma, adicional);
+		
+		paciente.tipoPaciente();
 		
 		System.out.println("----------------");
 		System.out.println(paciente);
