@@ -92,7 +92,7 @@ public class Principal {
 		
 		Paciente paciente = meusPacientes.adicionarPaciente(nome, idade, sexo, sintoma, adicional);
 		
-		paciente.tipoPaciente();
+		paciente.getAdicional();
 		
 		System.out.println("----------------");
 		System.out.println(paciente);

@@ -1,7 +1,7 @@
 package Paciente;
 import Interface.TipoPaciente;
 
-public class Paciente implements TipoPaciente {
+public class Paciente {
 
 	private String nome;
 	private int idade;
@@ -9,6 +9,7 @@ public class Paciente implements TipoPaciente {
 	private String sintoma;
 	private String tipo;
 	private String adicional;
+	private int score;
 
 	public Paciente(String nome) {
 		this.nome = nome;
@@ -33,9 +34,9 @@ public class Paciente implements TipoPaciente {
 		return sintoma;
 	}
 	
-	public String getTipo() {
-		return tipo;
-	}
+	//public String getTipo() {
+		//return tipo;
+	//}
 	
 	public void setNome(String nome){
 		this.nome = nome;
@@ -61,26 +62,24 @@ public class Paciente implements TipoPaciente {
 		this.adicional = adicional;
 	}
 	
-	@Override
-	public String tipoPaciente() {
+	public int getScore() {
+		return score;
+	}
+	
+	public int tipoPaciente() {
 		if(adicional == "Obeso" || adicional == "Doenca Cronica" || adicional == "Fumante") {
-			this.tipo = "Grupo Atencao";
+			score += 4;
 		}
-		else if(sintoma == "Febre" || sintoma == "Tosse" || sintoma == "Falta de ar" ) {
-			this.tipo = "Sintoma Covid";
+		if(sintoma == "Febre" || sintoma == "Tosse" || sintoma == "Falta de ar" ) {
+			score += 3;
 		}
-		else {
-			if(idade < 18) {
-				this.tipo = "Jovem";
-			}
-			else if(idade > 65) {
-				this.tipo = "Idoso";
-			}
-			else {
-				this.tipo = "Adulto";
-			}
+		if(idade <= 18) {
+			score += 2;
 		}
-		return tipo;
+		if(idade >= 60) {
+			score += 3;
+		}
+		return score;
 	}
 	
 	public String toString() {
@@ -89,7 +88,7 @@ public class Paciente implements TipoPaciente {
 				"Sexo: " + this.sexo + "\n"+
 				"Sintoma: " + this.sintoma + "\n"+
 				"Informações Adicionais: " + this.adicional + "\n"+
-				"Tipo de Paciente: " + this.tipo + "\n";
+				"Score: " + this.score + "\n";
 	}
 	
 	//public abstract String tipoPaciente(Paciente paciente);
