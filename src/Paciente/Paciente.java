@@ -1,5 +1,4 @@
 package Paciente;
-import Interface.TipoPaciente;
 
 public class Paciente {
 
@@ -7,15 +6,14 @@ public class Paciente {
 	private int idade;
 	private String sexo;
 	private String sintoma;
-	private String tipo;
 	private String adicional;
 	private int score;
+	private boolean comorbidade;
+	private boolean covid;
+	private String encaminhar;
 
 	public Paciente(String nome) {
 		this.nome = nome;
-		//this.idade = idade;
-		//this.sexo = sexo;
-		//this.sintoma = sintoma;
 	}
 		
 	public String getNome() {
@@ -34,9 +32,13 @@ public class Paciente {
 		return sintoma;
 	}
 	
-	//public String getTipo() {
-		//return tipo;
-	//}
+	public boolean getComorbidade() {
+		return comorbidade;
+	}
+	
+	public boolean getCovid() {
+		return covid;
+	}
 	
 	public void setNome(String nome){
 		this.nome = nome;
@@ -69,9 +71,11 @@ public class Paciente {
 	public int tipoPaciente() {
 		if(adicional == "Obeso" || adicional == "Doenca Cronica" || adicional == "Fumante") {
 			score += 4;
+			comorbidade = true;
 		}
 		if(sintoma == "Febre" || sintoma == "Tosse" || sintoma == "Falta de ar" ) {
 			score += 3;
+			covid = true;
 		}
 		if(idade <= 18) {
 			score += 2;
@@ -79,7 +83,32 @@ public class Paciente {
 		if(idade >= 60) {
 			score += 3;
 		}
+		if(idade > 18 && idade < 60) {
+			score += 1;
+		}
 		return score;
+	}
+	
+	public String getEncaminhar() {
+		return encaminhar;
+	}
+	
+	public String encaminhar() {
+		if(covid == true) {
+			encaminhar = "Infectologista"; //Infectologista
+		}
+		else{
+			if(idade < 18) { 
+				encaminhar = "Pediatra"; //Pediatra
+			}
+		    else if(idade > 60) {
+			    encaminhar = "Geriatra"; //Geriatra
+		    }
+		    else {
+		    	encaminhar = "Clinico Geral"; //Clinico Geral
+		    }
+		}
+		return encaminhar;
 	}
 	
 	public String toString() {
@@ -88,11 +117,8 @@ public class Paciente {
 				"Sexo: " + this.sexo + "\n"+
 				"Sintoma: " + this.sintoma + "\n"+
 				"Informações Adicionais: " + this.adicional + "\n"+
-				"Score: " + this.score + "\n";
+				"Score: " + this.score + "\n"+
+				"Encaminhar paciente para: " + this.encaminhar + "\n";
 	}
-	
-	//public abstract String tipoPaciente(Paciente paciente);
-	
-	//public abstract String mostrarInfo(Paciente paciente);
 		
 }

@@ -14,13 +14,13 @@ public class test {
 		eu.setSexo("M");
 		eu.setSintoma("Nenhum");
 		eu.setAdicional("Nao");
-		assertEquals(0, eu.getScore());
+		assertEquals(1, eu.getScore());
 	}
 	
 	@Test
 	public void ScoreJovem() {
 		Paciente eu = new Paciente("Eu");
-		eu.setIdade(15);
+		eu.setIdade(5);
 		eu.setSexo("M");
 		eu.setSintoma("Nenhum");
 		eu.setAdicional("Nao");
@@ -45,7 +45,7 @@ public class test {
 		eu.setSintoma("Nenhum");
 		eu.setAdicional("Obeso");
 		eu.tipoPaciente();
-		assertEquals(4, eu.getScore());
+		assertEquals(5, eu.getScore());
 	}
 	
 	@Test
@@ -81,5 +81,47 @@ public class test {
 		assertEquals(10, eu.getScore());
 	}
 	
-
+	@Test
+	public void EncaminharAdulto() {
+		Paciente eu = new Paciente("Eu");
+		eu.setIdade(25);
+		eu.setSexo("M");
+		eu.setSintoma("Sintoma");
+		eu.setAdicional("Nao");
+		eu.tipoPaciente();
+		assertEquals("Clinico Geral", eu.encaminhar());
+	}
+	
+	@Test
+	public void EncaminharJovem() {
+		Paciente eu = new Paciente("Eu");
+		eu.setIdade(15);
+		eu.setSexo("M");
+		eu.setSintoma("Perdi meu nariz");
+		eu.setAdicional("Obeso");
+		eu.tipoPaciente();
+		assertEquals("Pediatra", eu.encaminhar());
+	}
+	
+	@Test
+	public void EncaminharIdoso() {
+		Paciente eu = new Paciente("Eu");
+		eu.setIdade(105);
+		eu.setSexo("M");
+		eu.setSintoma("Virei um corsa");
+		eu.setAdicional("Fumante");
+		eu.tipoPaciente();
+		assertEquals("Geriatra", eu.encaminhar());
+	}
+	
+	@Test
+	public void EncaminharCovid() {
+		Paciente eu = new Paciente("Eu");
+		eu.setIdade(15);
+		eu.setSexo("M");
+		eu.setSintoma("Tosse");
+		eu.setAdicional("Doenca cardiaca");
+		eu.tipoPaciente();
+		assertEquals("Infectologista", eu.encaminhar());
+	}
 }

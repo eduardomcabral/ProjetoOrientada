@@ -1,15 +1,7 @@
 package Principal;
 
-import Paciente.Comum;
 import Paciente.Paciente;
-import Paciente.GrupoAtencao;
-import Paciente.SintomaCovid;
-import Medico.Medico;
 import java.util.Scanner;
-import Medico.ClinicoGeral;
-import Medico.Pediatra;
-import Medico.Geriatra;
-import Medico.Infectologista;
 
 
 public class Principal {
@@ -92,7 +84,8 @@ public class Principal {
 		
 		Paciente paciente = meusPacientes.adicionarPaciente(nome, idade, sexo, sintoma, adicional);
 		
-		paciente.getAdicional();
+		paciente.tipoPaciente();
+		paciente.encaminhar();
 		
 		System.out.println("----------------");
 		System.out.println(paciente);
